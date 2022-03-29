@@ -3,6 +3,7 @@ package com.wipro.oneeighthundred.service;
 import com.wipro.oneeighthundred.response.CountResponse;
 import com.wipro.oneeighthundred.response.User;
 import com.wipro.oneeighthundred.response.UsersResponse;
+import com.wipro.oneeighthundred.utility.Utility;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +30,8 @@ public class UserServiceImpl implements UserService {
             log.info("In UserServiceImpl.getDistinctCount()");
             List<User> jsonFeedData = jsonFeedService.getJSONFeedData();
             log.debug("jsonFeedData received :  {} ", jsonFeedData);
-            return new CountResponse(jsonFeedData.stream().distinct().count());
+            //return new CountResponse(jsonFeedData.stream().distinct().count());
+            return new CountResponse(jsonFeedData.stream().filter(Utility.distinctByKey(User::getUserId)).count());
         }catch (Exception e){
             log.error("Exception Occurred in UserServiceImpl.getDistinctCount() : {}", e.getMessage());
             throw e;
