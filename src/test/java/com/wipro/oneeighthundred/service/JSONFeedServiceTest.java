@@ -60,7 +60,6 @@ public class JSONFeedServiceTest {
     @Test
     public void getJSONFeedDataTestWithInternalServerError() throws Exception {
 
-
         ResponseEntity<List<User>> responseEntity = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         ReflectionTestUtils.setField(jsonFeedService,"JSONFeedURL","dummyURL");
         Mockito.when(restTemplate.exchange(ArgumentMatchers.anyString(),

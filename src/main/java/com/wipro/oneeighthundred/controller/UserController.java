@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -28,7 +29,7 @@ public class UserController {
         }
     }
 
-    @GetMapping(value = "/users")
+    @PostMapping(value = "/users")
     public ResponseEntity<UsersResponse> getUserDetails(){
         log.info("In getJsonFeedResponse");
         try{

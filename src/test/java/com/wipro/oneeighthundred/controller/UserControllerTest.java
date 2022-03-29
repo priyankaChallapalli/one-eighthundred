@@ -55,7 +55,7 @@ public class UserControllerTest {
         users.add(new User(2,2,"test user 2","test user 2"));
         usersResponse.setUserList(users);
         Mockito.when(userService.getUserDetails()).thenReturn(usersResponse);
-        mockMvc.perform(MockMvcRequestBuilders.get("/users"))
+        mockMvc.perform(MockMvcRequestBuilders.post("/users"))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.users[0].userId").value(1))
@@ -67,7 +67,7 @@ public class UserControllerTest {
     @Test
     public void getUserDetailsTestWithException() throws Exception {
         Mockito.when(userService.getUserDetails()).thenThrow(new Exception(""));
-        mockMvc.perform(MockMvcRequestBuilders.get("/users"))
+        mockMvc.perform(MockMvcRequestBuilders.post("/users"))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().is5xxServerError());
     }
